@@ -3,8 +3,8 @@ import {
   Routes,
   Route,
 
-} 
-from 'react-router-dom';
+}
+  from 'react-router-dom';
 import { useState } from "react";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
@@ -21,14 +21,17 @@ import Calendar from "./scenes/calendar/calendar";
 import { Maintenance } from './scenes/maintenence';
 import { Company } from './scenes/company';
 
+import { AuthProvider } from './context/auth';
+
 export const AppRouter = () => {
   const [isSidebar, setIsSidebar] = useState(true);
   return (
-   
-      <div className="app">
-        <Sidebar isSidebar={isSidebar} />
-        <main className="content">
-          <Topbar setIsSidebar={setIsSidebar} />
+
+    <div className="app">
+      <Sidebar isSidebar={isSidebar} />
+      <main className="content">
+        <Topbar setIsSidebar={setIsSidebar} />
+        <AuthProvider>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/team" element={<Team title="Time" subtitle="Manutenção em nosso time" />} />
@@ -43,9 +46,10 @@ export const AppRouter = () => {
             <Route path="/geography" element={<Geography />} />
             <Route path="/maintenance" element={<Maintenance />} />
           </Routes>
-        </main>
-      </div>
+        </AuthProvider>
+      </main>
+    </div>
 
-   
+
   )
 }
